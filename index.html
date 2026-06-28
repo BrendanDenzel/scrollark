@@ -184,7 +184,7 @@ body {
 
 /* References panel */
 .panel {
-  width: 300px; min-width: 300px;
+  width: 320px; min-width: 320px;
   background: var(--bg2); border-left: 1px solid var(--border);
   display: flex; flex-direction: column; overflow: hidden;
 }
@@ -391,6 +391,7 @@ body {
   background: var(--bg2); border-top: 1px solid var(--border);
   z-index: 100; padding: 8px 0 0;
   padding-bottom: max(8px, env(safe-area-inset-bottom, 16px));
+  flex-direction: row;
 }
 .mob-item {
   flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
@@ -404,7 +405,7 @@ body {
 @media (max-width: 900px) {
   .sidebar { display: none; }
   .panel { display: none; }
-  .mobile-nav { display: flex; }
+  .mobile-nav { display: flex !important; }
   .bible-content { padding: 18px 18px 120px; }
   .relay-bar { padding: 9px 12px; }
   .btab { padding: 6px 11px; font-size: 12px; }
@@ -412,10 +413,10 @@ body {
   .vtext { font-size: 17px; }
   .sermons-view, .notes-view, .reflect-view { padding: 18px 18px 100px; }
   .toast-wrap { bottom: 82px; width: calc(100% - 32px); }
-  .sermons-view, .notes-view { padding-top: 50px; }
-  #view-home > div, #view-settings > div, #view-bible > div { padding-top: 56px; }
-  .engage-header { padding-top: 56px; }
-  .tabs-bar { padding-top: 40px; }
+  .sermons-view, .notes-view { padding-top: 12px; }
+  #view-home > div, #view-settings > div, #view-bible > div { padding-top: 12px; }
+  .engage-header { padding-top: 12px; }
+  .tabs-bar { padding-top: 10px; }
   /* Bottom spacing so mobile nav never overlaps content */
   .relay-persistent { padding-bottom: 0; margin-bottom: 0; }
   .bible-content { padding-bottom: calc(80px + env(safe-area-inset-bottom, 20px)); }
@@ -428,6 +429,29 @@ body {
 }
 @media (min-width: 901px) {
   .mobile-nav { display: none !important; }
+}
+
+/* Tabs bar control buttons — consistent sizing */
+.tabs-ctrl-btn {
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Shrink all tabs-bar controls on mobile */
+@media (max-width: 900px) {
+  .tabs-ctrl-btn {
+    padding: 4px 9px;
+    font-size: 12px;
+  }
+  .tabs-controls {
+    gap: 3px;
+    margin-right: 2px;
+  }
+  .btab {
+    padding: 5px 9px;
+    font-size: 11px;
+  }
 }
 
 /* Live dot anim */
@@ -496,6 +520,11 @@ body {
   }
 }
 
+/* Hide desktop relay bar on mobile */
+@media (max-width: 900px) {
+  #relayPersistentDesktop { display: none !important; }
+}
+
 /* Verse selection toolbar */
 .verse-toolbar {
   position: absolute; display: flex; align-items: center; gap: 2px;
@@ -547,10 +576,6 @@ body {
       <div class="nav-item" id="nav-sermons" onclick="showView('sermons',this)">
         <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 19V6l12-3v13M9 19c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm12 0c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z"/></svg>
         Past Sermons
-      </div>
-      <div class="nav-item" id="nav-notes" onclick="showView('notes',this)">
-        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        Sermon Notes
       </div>
 <div class="nav-section">Preferences</div>
       <div class="nav-item" id="nav-settings" onclick="showView('settings',this)">
@@ -608,19 +633,9 @@ body {
       </div>
     </div>
 
-    <!-- SERMON NOTES view -->
-    <div class="view" id="view-notes">
-      <div class="notes-view">
-        <div class="notes-inner">
-          <div class="notes-h">Sermon Notes</div>
-          <div id="notesList"></div>
-        </div>
-      </div>
-    </div>
-
   <!-- HOME view -->
     <div class="view" id="view-home">
-  <div style="flex:1;overflow-y:auto;padding:80px 32px 80px;">
+  <div style="flex:1;overflow-y:auto;padding:60px 32px 80px;">
         <div style="max-width:640px;margin:0 auto;">
           <div style="display:flex;align-items:center;gap:14px;margin-bottom:32px;">
             <div style="width:48px;height:48px;background:linear-gradient(135deg,var(--accent) 0%,#a89cf7 100%);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">✦</div>
@@ -679,7 +694,7 @@ body {
 
     <!-- SETTINGS view -->
     <div class="view" id="view-settings">
-  <div style="flex:1;overflow-y:auto;padding:70px 40px 80px;">
+  <div style="flex:1;overflow-y:auto;padding:50px 40px 80px;">
         <div style="max-width:480px;margin:0 auto;">
           <div style="font-family:var(--serif);font-size:26px;margin-bottom:24px;">Settings</div>
           <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px;">
@@ -722,12 +737,30 @@ body {
         <p>Start a relay to see live references, quotes, and Scripture guidance.</p>
       </div>
     </div>
+    <!-- Relay bar DESKTOP — sits at bottom of panel, hidden on mobile -->
+    <div id="relayPersistentDesktop" style="background:var(--bg2);border-top:1px solid var(--border);flex-shrink:0;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+      <div style="flex:1;min-width:0;overflow:hidden;">
+        <div style="font-size:12px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="relayNameDesktop">Ready to listen</div>
+        <div style="font-size:11px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="relayPastorDesktop">Tap mic to start</div>
+      </div>
+      <div style="flex-shrink:0;display:flex;align-items:center;gap:4px;">
+        <div class="waveform" id="waveformDesktop"></div>
+        <button onclick="openTranscriptModal()" title="Transcript" style="padding:6px 8px;border-radius:6px;background:var(--bg4);border:none;color:var(--text2);cursor:pointer;font-size:11px;font-family:var(--sans);">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </button>
+        <button class="mic-btn" id="micBtnDesktop" onclick="toggleRelay()" style="padding:6px 10px;">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4m-4 0h8"/></svg>
+          <span id="micTxtDesktop">Listen</span>
+        </button>
+        <div class="timer-display" id="timerElDesktop" style="font-size:11px;min-width:28px;"></div>
+      </div>
+    </div>
   </div>
 
-<!-- Relay bar — outside app, above mobile nav -->
-<div class="relay-persistent" id="relayPersistent">
+<!-- Relay bar MOBILE — fixed above bottom nav, hidden on desktop -->
+<div id="relayPersistent" style="display:none;position:fixed;bottom:var(--nav-h,70px);left:0;right:0;z-index:99;background:var(--bg2);border-top:1px solid var(--border);">
   <div class="relay-bar">
-    <div class="relay-info" style="min-width:0;flex:0 1 auto;max-width:140px;">
+    <div class="relay-info" style="min-width:0;flex:1;overflow:hidden;">
       <div class="relay-sermon-name" id="relayName">Ready to listen</div>
       <div class="relay-pastor-name" id="relayPastor" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Tap mic to start</div>
     </div>
@@ -758,7 +791,7 @@ body {
     Ask
   </div>
   <div class="mob-item" onclick="showView('sermons');mobActive(this)">
-    <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 19V6l12-3v13"/></svg>
+    <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 19V6l12-3v13M9 19c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm12 0c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z"/></svg>
     Sermons
   </div>
   <div class="mob-item" onclick="showView('settings');mobActive(this)">
@@ -774,11 +807,11 @@ body {
 <div class="overlay" id="sermonLabelModal">
   <div class="modal" style="max-width:420px;">
     <div class="modal-head">
-      <div class="modal-title">Save this sermon</div>
+      <div class="modal-title" id="sermonLabelTitle">Sermon saved</div>
       <span class="modal-x" onclick="skipSermonLabel()">×</span>
     </div>
     <div class="modal-body" style="gap:10px;">
-      <div style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:4px;">Your relay has been saved automatically. Add details to make it easier to find later.</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:4px;">Add details to make it easier to find later.</div>
       <input class="m-input" id="labelTitle" placeholder="Sermon title (e.g. Walking by Faith)">
       <input class="m-input" id="labelPastor" placeholder="Pastor's name">
       <input class="m-input" id="labelPassage" placeholder="Main passage (e.g. Hebrews 11)">
@@ -886,7 +919,11 @@ async function sbFetch(path, opts={}){
       ...opts.headers
     }
   });
-  if(!r.ok){ const t=await r.text(); console.error('Supabase error',t); return null; }
+  if(!r.ok){
+    const t=await r.text();
+    console.error('Supabase error on', path, '→', t);
+    return null;
+  }
   return r.json().catch(()=>null);
 }
 
@@ -1017,16 +1054,16 @@ function changeFontSize(delta){
 
 function renderTabs(){
   const bar = document.getElementById('tabsBar');
-  const fontControls = `<div style="display:flex;align-items:center;gap:2px;margin-right:4px;">
-    <div class="version-btn" onclick="changeFontSize(-1)" title="Smaller text" style="padding:4px 8px;font-size:14px;">A−</div>
-    <div class="version-btn" onclick="changeFontSize(1)"  title="Larger text"  style="padding:4px 8px;font-size:14px;">A+</div>
+  const fontControls = `<div class="tabs-controls" style="display:flex;align-items:center;gap:6px;margin-right:6px;">
+    <div class="version-btn tabs-ctrl-btn" onclick="changeFontSize(-1)" title="Smaller text">A−</div>
+    <div class="version-btn tabs-ctrl-btn" onclick="changeFontSize(1)"  title="Larger text">A+</div>
+    <div class="version-btn tabs-ctrl-btn" onclick="toggleVerseSearch()" title="Search verses">⌕</div>
+    <div class="version-btn tabs-ctrl-btn" onclick="openVersionModal()">${currentVersion} ▾</div>
   </div>`;
   if(tabs.length === 0){
     bar.innerHTML = `<div class="tab-add" onclick="openAddTabModal()" style="padding:7px 14px;font-size:13px;color:var(--text3);">+ Open a passage</div>`
     + `<div style="flex:1;"></div>`
-    + fontControls
-    + `<div class="version-btn" onclick="toggleVerseSearch()" title="Search verses" style="margin-right:4px;">⌕</div>`
-    + `<div class="version-btn" onclick="openVersionModal()">${currentVersion} ▾</div>`;
+    + fontControls;
     document.getElementById('verseSearchBar').style.display = 'none';
     return;
   }
@@ -1035,9 +1072,7 @@ function renderTabs(){
   `).join('')
   + `<div class="tab-add" onclick="openAddTabModal()" title="New tab">+</div>`
   + `<div style="flex:1;"></div>`
-  + fontControls
-  + `<div class="version-btn" onclick="toggleVerseSearch()" title="Search verses" style="margin-right:4px;">⌕</div>`
-  + `<div class="version-btn" onclick="openVersionModal()">${currentVersion} ▾</div>`;
+  + fontControls;
 }
 
 function switchTab(i){
@@ -1168,16 +1203,22 @@ async function startRelay(){
       refs: []
     };
     const saved = await saveSermon(currentSermon);
-    if(saved&&saved[0]) currentSermon.id = saved[0].id;
+    if(saved && saved.id) currentSermon.id = saved.id;
+    else if(saved && saved[0] && saved[0].id) currentSermon.id = saved[0].id;
+    console.log('Relay started, sermon ID:', currentSermon.id);
 
     document.getElementById('relayName').textContent = currentSermon.title;
+    document.getElementById('relayNameDesktop').textContent = currentSermon.title;
     document.getElementById('relayPastor').textContent = 'Listening now…';
+    document.getElementById('relayPastorDesktop').textContent = 'Listening now…';
     document.getElementById('sdot').classList.add('live');
     document.getElementById('slabel').textContent = 'Live relay';
     document.getElementById('mobMicLabel') && (document.getElementById('mobMicLabel').textContent='Live');
     const btn=document.getElementById('micBtn');
     btn.classList.add('on');
     document.getElementById('micTxt').textContent='Stop';
+    document.getElementById('micBtnDesktop').classList.add('on');
+    document.getElementById('micTxtDesktop').textContent='Stop';
 
     startTimer(); startWave();
 
@@ -1229,21 +1270,45 @@ function stopRelay(){
   stopTimer(); stopWave();
   document.getElementById('micBtn').classList.remove('on');
   document.getElementById('micTxt').textContent='Listen';
+  document.getElementById('micBtnDesktop').classList.remove('on');
+  document.getElementById('micTxtDesktop').textContent='Listen';
   document.getElementById('sdot').classList.remove('live');
   document.getElementById('slabel').textContent='Start Relay';
   document.getElementById('stimerEl').textContent='';
   document.getElementById('relayName').textContent='Ready to listen';
+  document.getElementById('relayNameDesktop').textContent='Ready to listen';
   document.getElementById('relayPastor').textContent='Tap the mic to start a relay';
+  document.getElementById('relayPastorDesktop').textContent='Tap the mic to start a relay';
 
   if(currentSermon){
-    // Auto-save with what we have immediately
-    const autoSaved = {...currentSermon, transcript: fullTranscript, refs: JSON.stringify(relayEvents)};
+    // Snapshot state NOW before anything clears
+    const snapshotTranscript = fullTranscript;
+    const snapshotRefs = JSON.stringify(relayEvents);
+    const snapshotTranslation = currentVersion;
+    const snapshotPassages = JSON.stringify(tabs);
+    const snapshotHighlights = JSON.stringify(sessionUnderlines);
+
+    const autoUpdates = {
+      transcript: snapshotTranscript,
+      refs: snapshotRefs,
+      translation: snapshotTranslation,
+      passages: snapshotPassages,
+      highlights: snapshotHighlights,
+      relay_events: snapshotRefs
+    };
+
     if(currentUser && currentSermon.id){
-      updateSermon(currentSermon.id, {transcript: fullTranscript, refs: JSON.stringify(relayEvents)});
+      sbFetch(`sermons?id=eq.${currentSermon.id}`, {
+        method: 'PATCH',
+        prefer: 'return=representation',
+        body: JSON.stringify(autoUpdates)
+      }).then(r => console.log('Auto-save on stop:', r));
     } else {
-      saveLocalSermon(autoSaved);
+      saveLocalSermon({...currentSermon, ...autoUpdates, synced: false});
     }
-    // Show label modal so they can fill in details (or skip)
+
+    // Store snapshot on currentSermon so label modal can use it
+    Object.assign(currentSermon, autoUpdates);
     openSermonLabelModal(currentSermon.id);
   }
   loadSermons();
@@ -1409,22 +1474,38 @@ function startTimer(){
     const m=Math.floor(relaySeconds/60),s=relaySeconds%60;
     const str=`${m}:${s.toString().padStart(2,'0')}`;
     document.getElementById('timerEl').textContent=str;
+    document.getElementById('timerElDesktop').textContent=str;
     document.getElementById('stimerEl').textContent=str;
   },1000);
 }
-function stopTimer(){ clearInterval(timerInt); document.getElementById('timerEl').textContent=''; }
+function stopTimer(){
+  clearInterval(timerInt);
+  document.getElementById('timerEl').textContent='';
+  document.getElementById('timerElDesktop').textContent='';
+}
 
 function startWave(){
-  const wf=document.getElementById('waveform');
-  wf.innerHTML=[...Array(10)].map((_,i)=>`<div class="wbar" id="wb${i}" style="height:4px"></div>`).join('');
+  ['waveform','waveformDesktop'].forEach(id=>{
+    const wf=document.getElementById(id);
+    if(!wf) return;
+    wf.innerHTML=[...Array(10)].map((_,i)=>`<div class="wbar" id="${id}-b${i}" style="height:4px"></div>`).join('');
+  });
   waveInt=setInterval(()=>{
-    for(let i=0;i<10;i++){
-      const b=document.getElementById('wb'+i);
-      if(b) b.style.height=Math.floor(Math.random()*16+3)+'px';
-    }
+    ['waveform','waveformDesktop'].forEach(id=>{
+      for(let i=0;i<10;i++){
+        const b=document.getElementById(`${id}-b${i}`);
+        if(b) b.style.height=Math.floor(Math.random()*16+3)+'px';
+      }
+    });
   },110);
 }
-function stopWave(){ clearInterval(waveInt); document.getElementById('waveform').innerHTML=''; }
+function stopWave(){
+  clearInterval(waveInt);
+  ['waveform','waveformDesktop'].forEach(id=>{
+    const wf=document.getElementById(id);
+    if(wf) wf.innerHTML='';
+  });
+}
 
 // ===== PANEL =====
 function updatePanel(){
@@ -1478,17 +1559,19 @@ function showToast(ev){
   setTimeout(()=>d.remove(),5000);
 }
 
-function showToastMsg(msg){
+function showToastMsg(msg, duration=3000){
   const wrap = document.getElementById('toasts');
   const d = document.createElement('div');
   d.className = 'toast';
   d.innerHTML = `<div class="toast-top"><div class="toast-passage">${msg}</div></div>`;
   wrap.appendChild(d);
-  setTimeout(()=>d.remove(), 3000);
+  setTimeout(()=>d.remove(), duration);
 }
 
 // ===== VIEWS =====
 function showView(name, navEl){
+  const closeSermonActive = document.body.hasAttribute('data-sermon-revisit');
+
   document.querySelectorAll('.view').forEach(v=>{
     v.classList.remove('active');
     v.style.display='';
@@ -1499,9 +1582,17 @@ function showView(name, navEl){
     el.classList.add('active');
     if(name==='follow') el.style.display='flex';
   }
-  // Only show relay bar on Bible/Follow view
+
+  // Mobile relay: hidden during sermon revisit, otherwise only on Bible view
   const relay = document.getElementById('relayPersistent');
-  if(relay) relay.style.display = name==='follow' ? 'block' : 'none';
+  if(relay) relay.style.display = (name==='follow' && window.innerWidth <= 900 && !closeSermonActive) ? 'block' : 'none';
+
+  // Show or hide the close button depending on whether we're on the bible view
+  const closeBtn = document.getElementById('closeSermonBtn');
+  if(closeBtn){
+    closeBtn.style.display = (name === 'follow') ? 'flex' : 'none';
+  }
+
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   if(navEl) navEl.classList.add('active');
   else {
@@ -1509,7 +1600,7 @@ function showView(name, navEl){
     const navItem = document.getElementById(navId);
     if(navItem) navItem.classList.add('active');
   }
-if(name==='reflect') renderReflect();
+  if(name==='reflect') renderReflect();
   if(name==='sermons') loadSermons();
   if(name==='notes') renderNotes();
   if(name==='engage') renderEngage();
@@ -1570,8 +1661,166 @@ function renderSermonsList(sermons){
   }).join('');
 }
 
-function openSermon(id, passage){
-  quickOpen(passage||'Romans 8');
+function openSermonDetail(s){
+  // Show sermon detail in the sermons view
+  const el = document.getElementById('sermonsList');
+  const d = new Date(s.date);
+  const label = d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  const passages = s.passages ? JSON.parse(s.passages) : (s.passage ? [s.passage] : []);
+  const events = s.relay_events ? JSON.parse(s.relay_events) : (s.refs ? JSON.parse(s.refs) : []);
+  const trans = s.translation || 'NIV';
+
+  el.innerHTML = `
+    <div style="margin-bottom:18px;">
+      <div onclick="loadSermons()" style="font-size:13px;color:var(--accent);cursor:pointer;margin-bottom:14px;">← All Sermons</div>
+      <div style="font-family:var(--serif);font-size:24px;color:var(--text);margin-bottom:4px;">${s.title||'Untitled Sermon'}</div>
+      <div style="font-size:13px;color:var(--text3);">${s.pastor||'Pastor'} · ${label} · ${trans}</div>
+    </div>
+
+    ${s.transcript && s.transcript.length > 80 ? `
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px;">
+      <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;">AI Sermon Notes</div>
+      <div id="sermonDetailNotes" style="font-size:13px;color:var(--text2);">Generating notes…</div>
+    </div>
+    ` : ''}
+
+    ${events.length > 0 ? `
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px;">
+      <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;">Passages Referenced</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">
+        ${[...new Set(events.map(e=>e.passage))].map(p=>`
+          <span style="padding:3px 10px;border-radius:10px;background:rgba(124,106,245,0.12);color:var(--accent);font-size:12px;">${p}</span>
+        `).join('')}
+      </div>
+    </div>
+    ` : ''}
+
+    ${passages.length > 0 ? `
+    <button onclick="revisitSermon(${JSON.stringify(s).replace(/"/g,'&quot;')})" style="width:100%;padding:12px;border-radius:10px;background:var(--accent);border:none;color:#fff;font-size:14px;font-weight:500;cursor:pointer;font-family:var(--sans);margin-bottom:14px;">
+      📖 Revisit Scripture
+    </button>
+    ` : ''}
+
+    ${s.transcript ? `
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px;">
+      <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;">Transcript</div>
+      <div style="font-family:var(--serif);font-size:15px;color:var(--text2);line-height:1.8;max-height:200px;overflow-y:auto;">${s.transcript}</div>
+    </div>
+    ` : ''}
+  `;
+
+  // Generate AI notes only if not already cached
+  if(s.transcript && s.transcript.length > 80){
+    const cacheKey = 'sermon-notes-' + s.id;
+    const cached = sessionStorage.getItem(cacheKey);
+    if(cached){
+      const el = document.getElementById('sermonDetailNotes');
+      if(el) el.innerHTML = cached;
+    } else {
+      generateSermonDetailNotes(s.transcript, s.title, cacheKey);
+    }
+  }
+}
+
+async function generateSermonDetailNotes(transcript, title, cacheKey){
+  const el = document.getElementById('sermonDetailNotes');
+  if(!el) return;
+  try {
+    const r = await fetch('https://api.groq.com/openai/v1/chat/completions',{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+GROQ_KEY,'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'llama-3.3-70b-versatile',
+        messages:[{
+          role:'user',
+          content:`You are a sermon notes assistant. Based on this sermon transcript, generate structured notes in JSON.\n\nTranscript: "${transcript.slice(0,3000)}"\n\nRespond ONLY with JSON in this exact shape (no markdown, no extra keys):\n{"summary":"2-3 sentence summary","points":["key point 1","key point 2","key point 3"],"application":"one practical takeaway sentence"}`
+        }],
+        max_tokens: 500, temperature: 0.3
+      })
+    });
+    const data = await r.json();
+    const raw = data.choices?.[0]?.message?.content || '{}';
+    const notes = JSON.parse(raw.replace(/```json|```/g,'').trim());
+    if(!el) return;
+    const html = `
+      <div style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:14px;">${notes.summary||''}</div>
+      ${notes.points?.length ? `
+        <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;">Key Points</div>
+        ${notes.points.map(p=>`<div style="display:flex;gap:9px;font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:7px;"><span style="color:var(--accent);flex-shrink:0;">✦</span><span>${p}</span></div>`).join('')}
+      ` : ''}
+      ${notes.application ? `
+        <div style="margin-top:14px;padding:12px 14px;background:var(--bg3);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;font-size:13px;color:var(--text2);line-height:1.6;">${notes.application}</div>
+      ` : ''}
+    `;
+    el.innerHTML = html;
+    if(cacheKey) sessionStorage.setItem(cacheKey, html);
+  } catch(e){
+    if(el) el.textContent = 'Could not generate notes.';
+  }
+}
+
+function revisitSermon(s){
+  // Restore translation
+  if(s.translation) { currentVersion = s.translation; userPickedVersion = true; }
+
+  // Restore tabs/passages
+  if(s.passages){
+    try { tabs = JSON.parse(s.passages); activeTabIdx = 0; } catch(e){}
+  } else if(s.passage) {
+    tabs = [s.passage]; activeTabIdx = 0;
+  }
+
+  // Restore user highlights
+  if(s.highlights){
+    try { Object.assign(sessionUnderlines, JSON.parse(s.highlights)); } catch(e){}
+  }
+
+  // Restore relay-detected verse underlines from saved relay_events
+  const events = s.relay_events
+    ? (typeof s.relay_events === 'string' ? JSON.parse(s.relay_events) : s.relay_events)
+    : (s.refs ? (typeof s.refs === 'string' ? JSON.parse(s.refs) : s.refs) : []);
+
+  relayUnderlines = {};
+  events.forEach(ev => {
+    if(!ev.passage) return;
+    const match = ev.passage.match(/^(.+?)\s+(\d+)(?::(\d+)(?:-(\d+))?)?$/);
+    if(!match) return;
+    const book = match[1].trim();
+    const chapter = match[2];
+    const vStart = match[3] ? parseInt(match[3]) : null;
+    const vEnd   = match[4] ? parseInt(match[4]) : null;
+    const tabKey = tabs.find(t => {
+      const m = t.match(/^(.+?)\s+(\d+)/);
+      return m && m[1].toLowerCase() === book.toLowerCase() && m[2] === chapter;
+    }) || `${book} ${chapter}`;
+    if(!relayUnderlines[tabKey]) relayUnderlines[tabKey] = new Set();
+    if(vStart){
+      for(let i = vStart; i <= (vEnd || vStart); i++) relayUnderlines[tabKey].add(i);
+    }
+  });
+
+  // Navigate to Bible view
+  showView('follow');
+  sidebarActive('nav-follow');
+  document.querySelectorAll('.mob-item').forEach((n,i)=>{ if(i===1) n.classList.add('active'); else n.classList.remove('active'); });
+  renderTabs();
+  renderBible();
+  const isMobile = window.innerWidth <= 900;
+  const toastDuration = isMobile ? 1200 : 3000;
+
+  // Hide relay bar immediately on mobile (don't wait for toast)
+  if(isMobile){
+    const mobileRelay = document.getElementById('relayPersistent');
+    if(mobileRelay) mobileRelay.style.display = 'none';
+  }
+
+  showToastMsg('Scripture restored ✓', toastDuration);
+
+  if(isMobile){
+    setTimeout(()=> showCloseSermonBtn(), toastDuration + 100);
+  } else {
+    showCloseSermonBtn();
+  }
 }
 
 // ===== NOTES =====
@@ -1678,6 +1927,79 @@ async function sendAI(){
     thinking.remove();
     addAIMsg('ai','Connection unavailable. Please check your network and try again.');
   }
+}
+
+function showCloseSermonBtn(){
+  // Remove any existing one
+  const existing = document.getElementById('closeSermonBtn');
+  if(existing) existing.remove();
+
+  // Mark body so showView knows revisit is active
+  document.body.setAttribute('data-sermon-revisit', '1');
+
+  const btn = document.createElement('div');
+  btn.id = 'closeSermonBtn';
+  btn.innerHTML = `
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    Close sermon scripture
+  `;
+  const isMobile = window.innerWidth <= 900;
+  btn.style.cssText = `
+    position: fixed;
+    bottom: ${isMobile ? 'calc(var(--nav-h, 70px) + 8px)' : '24px'};
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 150;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 20px;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text2);
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    white-space: nowrap;
+    transition: all 0.15s;
+    font-family: var(--sans);
+  `;
+
+  // Hide mobile relay bar immediately
+  if(isMobile){
+    const mobileRelay = document.getElementById('relayPersistent');
+    if(mobileRelay) mobileRelay.style.display = 'none';
+  }
+  btn.onmouseover = () => {
+    btn.style.background = 'var(--bg4)';
+    btn.style.color = 'var(--text)';
+    btn.style.borderColor = 'var(--accent)';
+  };
+  btn.onmouseout = () => {
+    btn.style.background = 'var(--bg3)';
+    btn.style.color = 'var(--text2)';
+    btn.style.borderColor = 'var(--border2)';
+  };
+  btn.onclick = () => {
+    tabs = [];
+    activeTabIdx = 0;
+    relayUnderlines = {};
+    sessionUnderlines = {};
+    liveHighlight = null;
+    document.body.removeAttribute('data-sermon-revisit');
+    renderTabs();
+    renderBible();
+    // Restore mobile relay bar
+    if(isMobile){
+      const mobileRelay = document.getElementById('relayPersistent');
+      if(mobileRelay) mobileRelay.style.display = 'block';
+    }
+    btn.remove();
+    showToastMsg('Scripture closed');
+  };
+  document.body.appendChild(btn);
 }
 
 // ===== FEATURES =====
@@ -2295,8 +2617,8 @@ async function saveSermon(sermon){
     const result = await sbFetch('sermons', { method:'POST', prefer:'return=representation', body: JSON.stringify(payload) });
     if(result && result[0]) return result[0];
   }
-  // Not logged in — save locally
-  const localSermon = { ...sermon, synced: false };
+  // Not logged in — save locally with a stable local ID
+  const localSermon = { ...sermon, id: 'local-' + Date.now(), synced: false };
   saveLocalSermon(localSermon);
   return localSermon;
 }
@@ -2337,7 +2659,8 @@ function renderSermonsList(sermons, source){
     const d = new Date(s.date);
     const label = d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
     const isUnsynced = s.synced === false;
-    return `<div class="sermon-row" onclick="openSermon('${s.id}','${s.passage||''}')">
+    const sid = encodeURIComponent(JSON.stringify(s));
+    return `<div class="sermon-row" onclick="openSermonDetail(${JSON.stringify(s).replace(/"/g,'&quot;')})">
       <div class="sermon-icon">✦</div>
       <div class="sermon-info">
         <div class="sermon-title">${s.title||'Untitled Sermon'}</div>
@@ -2353,10 +2676,24 @@ let labelingSermonId = null;
 
 function openSermonLabelModal(sermonId){
   labelingSermonId = sermonId;
-  // Pre-fill passage from current tab
-  document.getElementById('labelPassage').value = tabs[activeTabIdx] || '';
-  document.getElementById('labelTitle').value = '';
+
+  // Pre-fill title with date
+  const dateStr = new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  document.getElementById('labelTitle').value = dateStr;
+
+  // Pre-fill pastor blank for them to fill
   document.getElementById('labelPastor').value = '';
+
+  // Collect all passages, strip to Book+Chapter only, deduplicate
+  const refPassages = relayEvents.map(e => e.passage).filter(Boolean);
+  const allPassages = [...tabs, ...refPassages];
+  const bookChapters = allPassages.map(p => {
+    const m = p.match(/^(.+?\s+\d+)/);
+    return m ? m[1].trim() : p.trim();
+  });
+  const uniquePassages = [...new Set(bookChapters)];
+  document.getElementById('labelPassage').value = uniquePassages.join(', ');
+
   // Show sign-in prompt if not logged in
   document.getElementById('sermonLabelSigninPrompt').style.display = currentUser ? 'none' : 'block';
   openModal('sermonLabelModal');
@@ -2366,12 +2703,50 @@ async function submitSermonLabel(){
   const title   = document.getElementById('labelTitle').value.trim() || currentSermon?.title || 'Untitled Sermon';
   const pastor  = document.getElementById('labelPastor').value.trim() || 'Pastor';
   const passage = document.getElementById('labelPassage').value.trim() || tabs[activeTabIdx] || '';
-  const updates = { title, pastor, passage, transcript: fullTranscript, refs: JSON.stringify(relayEvents) };
+
+  // Pull from currentSermon snapshot (captured at stopRelay before state cleared)
+  const safeUpdates = {
+    title, pastor, passage,
+    transcript:   currentSermon?.transcript   || '',
+    refs:         currentSermon?.refs         || '[]',
+    translation:  currentSermon?.translation  || currentVersion,
+    passages:     currentSermon?.passages     || JSON.stringify(tabs),
+    highlights:   currentSermon?.highlights   || JSON.stringify(sessionUnderlines),
+    relay_events: currentSermon?.relay_events || '[]'
+  };
+
+  console.log('Saving sermon label. ID:', labelingSermonId, 'Updates:', safeUpdates);
 
   if(labelingSermonId){
-    await updateSermon(labelingSermonId, updates);
-    if(currentSermon) Object.assign(currentSermon, updates);
+    if(currentUser){
+      const r = await sbFetch(`sermons?id=eq.${labelingSermonId}`, {
+        method: 'PATCH',
+        prefer: 'return=representation',
+        body: JSON.stringify(safeUpdates)
+      });
+      console.log('PATCH result:', r);
+
+      if(!r || !r.length){
+        // Row didn't exist — insert fresh
+        console.warn('PATCH matched nothing, inserting new row');
+        const payload = {
+          ...safeUpdates,
+          user_id: currentUser.id,
+          date: new Date().toISOString().split('T')[0]
+        };
+        const ins = await sbFetch('sermons', {
+          method: 'POST',
+          prefer: 'return=representation',
+          body: JSON.stringify(payload)
+        });
+        console.log('INSERT result:', ins);
+      }
+    } else {
+      updateLocalSermon(labelingSermonId, safeUpdates);
+    }
+    if(currentSermon) Object.assign(currentSermon, safeUpdates);
   }
+
   closeModal('sermonLabelModal');
   showToastMsg('Sermon saved ✓');
   loadSermons();
